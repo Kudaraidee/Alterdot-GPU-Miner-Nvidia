@@ -21,7 +21,7 @@ EhssanD:
 
 This is a CUDA accelerated mining application which handle :
 
-Dynamic (argon2d)
+Alterdot (argon2d)
 Decred (Blake256 14-rounds - 180 bytes)
 HeavyCoin & MjollnirCoin
 FugueCoin
@@ -72,7 +72,7 @@ This code is based on the pooler cpuminer and inherits
 its command line interface and options.
 
   -a, --algo=ALGO       specify the algorithm to use
-                          argon2d     use to mine Dynamic
+                          argon2d     use to mine Alterdot
                           bastion     use to mine Joincoin
                           bitcore     use to mine Bitcore's Timetravel10
                           blake       use to mine Saffroncoin (Blake256)

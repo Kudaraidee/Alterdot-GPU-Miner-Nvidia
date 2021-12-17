@@ -16,7 +16,7 @@ static bool init[MAX_GPUS] = {0};
 uint8_t* memory[MAX_GPUS];
 
 
-void argon2d_dyn_hash( void *output, const void *input )
+void argon2d16000_hash( void *output, const void *input )
 {
     argon2_context context;
     context.out = (uint8_t *)output;
@@ -33,10 +33,10 @@ void argon2d_dyn_hash( void *output, const void *input )
     context.free_cbk = NULL;
     context.flags = DEFAULT_ARGON2_FLAG; // = ARGON2_DEFAULT_FLAGS
     // main configurable Argon2 hash parameters
-    context.m_cost = 500;  // Memory in KiB (512KB)
-    context.lanes = 8;     // Degree of Parallelism
+    context.m_cost = 16000;  // Memory in KiB (16384KB)
+    context.lanes = 1;     // Degree of Parallelism
     context.threads = 1;   // Threads
-    context.t_cost = 2;    // Iterations
+    context.t_cost = 1;    // Iterations
     context.version = ARGON2_VERSION_10;
 
     argon2_ctx( &context, Argon2_d );
@@ -139,7 +139,7 @@ int scanhash_argon2d( int thr_id, struct work *work, uint32_t max_nonce, unsigne
             uint32_t _ALIGN(64) vhash[8];
             const uint32_t Htarg = ptarget[7];
             be32enc(&endiandata[19], work->nonces[0]);
-            argon2d_dyn_hash( vhash, endiandata );
+            argon2d16000_hash( vhash, endiandata );
 
             if (vhash[7] <= Htarg && fulltest(vhash, ptarget)) {
                 work->valid_nonces = 1;
@@ -147,7 +147,7 @@ int scanhash_argon2d( int thr_id, struct work *work, uint32_t max_nonce, unsigne
 
                 if (work->nonces[1] != UINT32_MAX) {
                     be32enc(&endiandata[19], work->nonces[1]);
-                    argon2d_dyn_hash(vhash, endiandata);
+                    argon2d16000_hash(vhash, endiandata);
                     if (vhash[7] <= Htarg && fulltest(vhash, ptarget)) {
                         bn_set_target_ratio(work, vhash, 1);
                         work->valid_nonces++;

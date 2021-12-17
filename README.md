@@ -1,7 +1,7 @@
-ccminer-dyn Dynamic Nvidia GPU miner
+ccminer-adot Alterdot Nvidia GPU miner
 ========================
 
-This fork is only meant to be used to mine Dynamic (DYN) with Argon2d algorithm.
+This fork is only meant to be used to mine Alterdot (ADOT) with Argon2d16000 algorithm
 
 releases: https://github.com/duality-solutions/Dynamic-GPU-Miner-Nvidia/releases
 
@@ -66,7 +66,7 @@ To rebuild them, you need to clone this repository and its submodules :
 Sample command line
 ----------------------------------------
 
-ccminer -a argon2d -o stratum+tcp://server:port -u walletaddress -p c=DYN
+ccminer -a argon2d -o stratum+tcp://server:port -u walletaddress -p c=ADOT
 
 You can also use --intensity/-i (1-40) to increase gpu memory utilization.
 
